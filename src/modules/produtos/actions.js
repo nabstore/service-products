@@ -4,12 +4,30 @@ import fs from "fs";
 const index = async (req, res) => {
   // #swagger.tags = ['Produtos']
   // #swagger.summary = 'Retorna uma lista com todos os produtos.'
+  /* #swagger.parameters['ids'] = {
+            name: 'ids',
+            type: 'array',
+            required: 'false',
+            items: { type: 'integer' },
+        } 
+    */
   const page = req.query.page ? req.query.page : 1;
+  let queryOptions = {
+    limit: 10,
+    offset: (page - 1) * 10,
+  }
+
+  if (req.query.ids) {
+    const ids = req.query.ids.split(',').map(id => Number(id));
+    queryOptions = {
+      where: {
+        id: ids
+      }
+    }
+  }
+
   try {
-    const produtos = await Produto.findAll({
-      limit: 10,
-      offset: (page - 1) * 10,
-    });
+    const produtos = await Produto.findAll(queryOptions);
     res.status(200).send(produtos);
   } catch (error) {
     res.status(500).send(error);

@@ -29,6 +29,15 @@
         "description": "",
         "parameters": [
           {
+            "name": "ids",
+            "type": "array",
+            "required": false,
+            "items": {
+              "type": "integer"
+            },
+            "in": "query"
+          },
+          {
             "name": "page",
             "in": "query",
             "type": "string"
