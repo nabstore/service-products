@@ -21,7 +21,7 @@ const offers = async (req, res) => {
   // #swagger.summary = 'Retorna uma lista com os três produtos mais baratos.'
   try {
     const produtos = await Produto.findAll({
-      order: [['preco', 'DESC']],
+      order: [["preco", "DESC"]],
       limit: 4,
     });
     res.status(200).send(produtos);
@@ -33,13 +33,49 @@ const offers = async (req, res) => {
 const create = async (req, res, next) => {
   // #swagger.tags = ['Produtos']
   // #swagger.summary = 'Cria um novo produto.'
-  // #swagger.consumes = ['multipart/form-data']
+  /* #swagger.requestBody = {
+      required: false,
+      content: {}
+    }
+  */
+  /* #swagger.security = [{
+      "bearerAuth": []
+  }] */
+  // #swagger.consumes = ['multipart/form-data', 'multipart/form-data']
   /* #swagger.parameters['singleFile'] = {
             in: 'formData',
             name: 'imagem',
             type: 'file',
             required: 'false',
             description: 'Imagem em formato PNG.',
+        } 
+    */
+  /* #swagger.parameters['nome'] = {
+            in: 'formData',
+            name: 'nome',
+            type: 'string',
+            required: 'true',
+        } 
+    */
+  /* #swagger.parameters['preco'] = {
+            in: 'formData',
+            name: 'preco',
+            type: 'integer',
+            required: 'true',
+        } 
+    */
+  /* #swagger.parameters['estoque'] = {
+            in: 'formData',
+            name: 'estoque',
+            type: 'integer',
+            required: 'true',
+        } 
+    */
+  /* #swagger.parameters['descricao'] = {
+            in: 'formData',
+            name: 'descricao',
+            type: 'string',
+            required: 'false',
         } 
     */
 
@@ -92,6 +128,9 @@ const read = async (req, res) => {
 const update = async (req, res) => {
   // #swagger.tags = ['Produtos']
   // #swagger.summary = 'Edita os dados de um produto dado seu ID.'
+  /* #swagger.security = [{
+      "bearerAuth": []
+  }] */
   const id = req.params.id;
 
   try {
@@ -131,6 +170,9 @@ const update = async (req, res) => {
 const del = async (req, res) => {
   // #swagger.tags = ['Produtos']
   // #swagger.summary = 'Deleta um produto dado seu ID.'
+  /* #swagger.security = [{
+      "bearerAuth": []
+  }] */
   const id = req.params.id;
 
   try {

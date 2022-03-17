@@ -54,21 +54,6 @@
         ],
         "parameters": [
           {
-            "name": "substring(7",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "length",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
             "name": "imagem",
             "in": "formData",
             "type": "file",
@@ -76,25 +61,28 @@
             "description": "Imagem em formato PNG."
           },
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "nome": {
-                  "example": "any"
-                },
-                "preco": {
-                  "example": "any"
-                },
-                "estoque": {
-                  "example": "any"
-                },
-                "descricao": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "nome",
+            "in": "formData",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "preco",
+            "in": "formData",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "estoque",
+            "in": "formData",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "descricao",
+            "in": "formData",
+            "type": "string",
+            "required": false
           }
         ],
         "responses": {
@@ -103,13 +91,16 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {}
         }
       }
     },
@@ -172,21 +163,6 @@
             "type": "string"
           },
           {
-            "name": "substring(7",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "length",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -215,16 +191,15 @@
           "400": {
             "description": "Bad Request"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -238,32 +213,11 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "substring(7",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "length",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "404": {
             "description": "Not Found"
@@ -271,7 +225,12 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/produtos/{id}/image": {
@@ -286,510 +245,6 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/usuarios": {
-      "get": {
-        "tags": [
-          "Usuarios"
-        ],
-        "summary": "Lista todos os usuarios.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "tipoUsuarioId",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Usuarios"
-        ],
-        "summary": "Cria um novo usuário com senha encriptada.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "senha": {
-                  "example": "any"
-                },
-                "nome": {
-                  "example": "any"
-                },
-                "tipoUsuarioId": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/login": {
-      "post": {
-        "tags": [
-          "Usuarios"
-        ],
-        "summary": "Efetua o login do usuário na aplicação.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "example": "any"
-                },
-                "senha": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/logout": {
-      "get": {
-        "tags": [
-          "Usuarios"
-        ],
-        "summary": "Efetua o logout do usuário na aplicação.",
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/compras": {
-      "post": {
-        "tags": [
-          "Compras"
-        ],
-        "summary": "Realiza uma compra e salva no banco.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "substring(7",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "length",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "produtos": {
-                  "example": "any"
-                },
-                "enderecoId": {
-                  "example": "any"
-                },
-                "cartaoId": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "get": {
-        "tags": [
-          "Compras"
-        ],
-        "summary": "Retorna uma lista com todas as compras do usuário logado",
-        "description": "",
-        "parameters": [
-          {
-            "name": "substring(7",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "length",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/compras/{id}": {
-      "get": {
-        "tags": [
-          "Compras"
-        ],
-        "summary": "Retorna os dados de uma compra do usuário logado.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "substring(7",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "length",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/cartao": {
-      "post": {
-        "tags": [
-          "Cartao"
-        ],
-        "summary": "Cria um novo cartão para o usuário logado.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "substring(7",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "length",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "number": {
-                  "example": "any"
-                },
-                "apelido": {
-                  "example": "any"
-                },
-                "validade": {
-                  "example": "any"
-                },
-                "cvv": {
-                  "example": "any"
-                },
-                "titular": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "get": {
-        "tags": [
-          "Cartao"
-        ],
-        "summary": "Retorna uma lista com todos os cartões do usuário logado",
-        "description": "",
-        "parameters": [
-          {
-            "name": "substring(7",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "length",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/enderecos": {
-      "get": {
-        "tags": [
-          "Enderecos"
-        ],
-        "summary": "Lista os endereços de um usuário.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "substring(7",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "length",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "Enderecos"
-        ],
-        "summary": "Cria um novo endereço para um usuário.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "substring(7",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "length",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "logradouro": {
-                  "example": "any"
-                },
-                "numero": {
-                  "example": "any"
-                },
-                "bairro": {
-                  "example": "any"
-                },
-                "cidade": {
-                  "example": "any"
-                },
-                "uf": {
-                  "example": "any"
-                },
-                "cep": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/entregas": {
-      "get": {
-        "tags": [
-          "Entregas"
-        ],
-        "summary": "Calcula a estimativa de entrega para um CEP.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "cep",
-            "in": "query",
             "type": "string"
           }
         ],
