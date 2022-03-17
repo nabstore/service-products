@@ -1,6 +1,6 @@
-# Backend da Nabstore
-#### Aluno: Nabson Paiva
-Este diretório possui o backend (API Rest) da loja online Nabstore desenvolvida em NodeJS.
+# Service Products
+
+Microserviço usado pelo mfe-products do Time Products.
 
 ## Para executar pela primeira vez
 1. **Execução da API e do banco**:
