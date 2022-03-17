@@ -2,25 +2,25 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "store",
+    "database": "db_products",
     "host": "mysqldb",
     "dialect": "mysql",
-    "port": 3307
+    "port": 3309
   },
   "test": {
     "username": "root",
     "password": "root",
-    "database": "store",
+    "database": "db_products",
     "host": "mysqldb",
     "dialect": "mysql",
-    "port": 3307
+    "port": 3309
   },
   "production": {
     "username": "root",
     "password": "root",
-    "database": "store",
+    "database": "db_products",
     "host": "mysqldb",
     "dialect": "mysql",
-    "port": 3307
+    "port": 3309
   }
 }

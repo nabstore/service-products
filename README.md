@@ -18,7 +18,7 @@ Este diretório possui o backend (API Rest) da loja online Nabstore desenvolvida
     ```
     ou
     ```bash
-    docker exec -it web_shop npx sequelize db:migrate
+    docker exec -it service_products npx sequelize db:migrate
     ```
 
 3. **Inserir seeds**:
@@ -27,7 +27,7 @@ Este diretório possui o backend (API Rest) da loja online Nabstore desenvolvida
     ```
     ou
     ```bash
-    docker exec -it web_shop npx sequelize-cli db:seed:all
+    docker exec -it service_products npx sequelize-cli db:seed:all
     ```
 
 

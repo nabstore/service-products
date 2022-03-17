@@ -2,12 +2,11 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Nabstore Backend",
-    "description": "Backend em monolito da loja Nabstore."
+    "title": "Service Products",
+    "description": "Microsserviço do Time Products."
   },
-  "host": "localhost:3020",
+  "host": "localhost:3022",
   "basePath": "/",
-  "tags": [],
   "schemes": [
     "http"
   ],
@@ -20,8 +19,6 @@
       "bearerFormat": "JWT"
     }
   },
-  "consumes": [],
-  "produces": [],
   "paths": {
     "/produtos": {
       "get": {
@@ -57,14 +54,29 @@
         ],
         "parameters": [
           {
+            "name": "substring(7",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "length",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "imagem",
             "in": "formData",
             "type": "file",
-            "required": "false",
+            "required": false,
             "description": "Imagem em formato PNG."
           },
           {
-            "name": "obj",
+            "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
@@ -95,8 +107,8 @@
           "401": {
             "description": "Unauthorized"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "403": {
+            "description": "Forbidden"
           }
         }
       }
@@ -160,7 +172,22 @@
             "type": "string"
           },
           {
-            "name": "obj",
+            "name": "substring(7",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "length",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
@@ -191,11 +218,11 @@
           "401": {
             "description": "Unauthorized"
           },
+          "403": {
+            "description": "Forbidden"
+          },
           "404": {
             "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
@@ -211,6 +238,21 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "substring(7",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "length",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -219,6 +261,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "404": {
             "description": "Not Found"
@@ -244,7 +289,11 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/usuarios": {
@@ -278,7 +327,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "obj",
+            "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
@@ -318,7 +367,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "obj",
+            "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
@@ -337,8 +386,8 @@
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -370,18 +419,33 @@
         "description": "",
         "parameters": [
           {
-            "name": "obj",
+            "name": "substring(7",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "length",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
+                "produtos": {
+                  "example": "any"
+                },
                 "enderecoId": {
                   "example": "any"
                 },
                 "cartaoId": {
-                  "example": "any"
-                },
-                "produtos": {
                   "example": "any"
                 }
               }
@@ -411,7 +475,23 @@
         ],
         "summary": "Retorna uma lista com todas as compras do usuário logado",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "substring(7",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "length",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -442,6 +522,21 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "substring(7",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "length",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
             "type": "string"
           }
         ],
@@ -475,7 +570,22 @@
         "description": "",
         "parameters": [
           {
-            "name": "obj",
+            "name": "substring(7",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "length",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
@@ -522,7 +632,23 @@
         ],
         "summary": "Retorna uma lista com todos os cartões do usuário logado",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "substring(7",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "length",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -548,7 +674,23 @@
         ],
         "summary": "Lista os endereços de um usuário.",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "substring(7",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "length",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -577,7 +719,22 @@
         "description": "",
         "parameters": [
           {
-            "name": "obj",
+            "name": "substring(7",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "length",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
@@ -643,6 +800,5 @@
         }
       }
     }
-  },
-  "definitions": {}
+  }
 }

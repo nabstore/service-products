@@ -1,7 +1,7 @@
 version: '3.8'
 services:
-    web:
-        container_name: web_shop
+    service_products:
+        container_name: service_products
         build:
             context: .
         env_file: ./.env
