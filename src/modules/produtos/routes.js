@@ -28,5 +28,9 @@ router.delete(
   produtosActions.del
 );
 router.get("/produtos/:id/image", produtosActions.getImage);
+router.put(
+  "/produtos/estoque/decrement",
+  produtosActions.decrementProductsEstoque
+);
 
 export default router;

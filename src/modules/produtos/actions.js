@@ -15,15 +15,15 @@ const index = async (req, res) => {
   let queryOptions = {
     limit: 10,
     offset: (page - 1) * 10,
-  }
+  };
 
   if (req.query.ids) {
-    const ids = req.query.ids.split(',').map(id => Number(id));
+    const ids = req.query.ids.split(",").map((id) => Number(id));
     queryOptions = {
       where: {
-        id: ids
-      }
-    }
+        id: ids,
+      },
+    };
   }
 
   try {
@@ -215,4 +215,39 @@ const getImage = (req, res) => {
   res.sendFile(`/usr/app/public/uploads/${produtoId}/image.png`);
 };
 
-export default { index, create, read, update, del, getImage, offers };
+const decrementProductsEstoque = async (req, res) => {
+  // #swagger.tags = ['Produtos']
+  // #swagger.summary = 'Decrementa a quantidade de todo os produtos passados.'
+  /* #swagger.security = [{
+      "bearerAuth": []
+  }] */
+  const produtos = req.body.produtos;
+
+  try {
+    for (let produto of produtos) {
+      await Produto.decrement(
+        { estoque: produto.quantidade },
+        {
+          where: {
+            id: produto.id,
+          },
+        }
+      )
+    }
+
+    res.status(200).send();
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
+export default {
+  index,
+  create,
+  decrementProductsEstoque,
+  read,
+  update,
+  del,
+  getImage,
+  offers,
+};

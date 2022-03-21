@@ -263,6 +263,42 @@
           }
         }
       }
+    },
+    "/produtos/estoque/decrement": {
+      "put": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Decrementa a quantidade de todo os produtos passados.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "produtos": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
     }
   }
 }
