@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+    service_products:
+        container_name: service_products
+        build:
+            context: .
+        env_file: ./.env
+        command: npm start
+        volumes: 
+            - .:/usr/app/
+        ports:
+            - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+        depends_on: 
+            - mysqldb
+        environment: 
+            MYSQL_HOST: mysqldb
+        networks:
+            - service_products_back
+            - services_net
+    mysqldb:
+        image: mysql
+        env_file: ./.env
+        environment: 
+            MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+            MYSQL_TCP_PORT: $MYSQL_DOCKER_PORT
+            MYSQL_DATABASE: $MYSQL_DATABASE
+            MYSQL_ROOT_HOST: "%"
+        ports: 
+            - $MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT
+        volumes:
+            - mysql:/var/lib/mysql
+            - mysql_config:/etc/mysql
+        networks:
+            - service_products_back
+
+volumes:
+    mysql:
+    mysql_config:
+
+networks:
+    service_products_back:
+        driver: bridge
+    services_net:
+        external:
+            name: nabstore_services_network
