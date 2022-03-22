@@ -1,4 +1,5 @@
 import { Produto } from "../../models/index";
+import { Op } from "sequelize";
 import fs from "fs";
 
 const index = async (req, res) => {
@@ -39,6 +40,11 @@ const offers = async (req, res) => {
   // #swagger.summary = 'Retorna uma lista com os três produtos mais baratos.'
   try {
     const produtos = await Produto.findAll({
+      where: {
+        estoque: {
+          [Op.gt]: 0,
+        },
+      },
       order: [["preco", "DESC"]],
       limit: 4,
     });
